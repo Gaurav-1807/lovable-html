@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>I'm Sorry, Krishu 💖</title>
+<style>
+  /* ---------------- GLOBAL STYLES ---------------- */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #ff9a9e);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    color: #5b2a4e;
+    overflow-x: hidden;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 30px 16px 80px;
+    position: relative;
+  }
+
+  @keyframes gradientFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ---------------- FLOATING BACKGROUND HEARTS ---------------- */
+  .bg-hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .bg-hearts span {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    opacity: 0.7;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ---------------- MAIN CARD ---------------- */
+  .card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px 32px;
+    max-width: 620px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(155, 60, 120, 0.35);
+    text-align: center;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: cardIn 1.2s cubic-bezier(.2,.8,.2,1) both;
+    margin-top: 20px;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .beating-heart {
+    font-size: 80px;
+    display: inline-block;
+    animation: beat 1.1s infinite;
+    filter: drop-shadow(0 6px 14px rgba(220, 40, 90, 0.4));
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    25%      { transform: scale(1.18); }
+    40%      { transform: scale(0.96); }
+    60%      { transform: scale(1.12); }
+  }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 44px);
+    margin: 14px 0 6px;
+    background: linear-gradient(90deg, #e91e63, #9c27b0, #e91e63);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+
+  .subtitle {
+    font-size: 18px;
+    color: #7a3a66;
+    margin-bottom: 22px;
+    font-style: italic;
+  }
+
+  .letter {
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #5b2a4e;
+    background: rgba(255, 240, 247, 0.6);
+    border-left: 5px solid #ff6fa5;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 10px 0 24px;
+  }
+  .letter p { margin-bottom: 14px; }
+  .letter p:last-child { margin-bottom: 0; }
+  .signature {
+    text-align: right;
+    font-weight: bold;
+    color: #d81b60;
+    font-size: 18px;
+  }
+
+  /* ---------------- THE MAGIC BUTTON ---------------- */
+  .magic-btn {
+    font-family: inherit;
+    font-size: 21px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 18px 42px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff5e8a, #ff2d6f, #c2185b);
+    background-size: 200% 200%;
+    box-shadow: 0 10px 28px rgba(216, 27, 96, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: glowPulse 2s infinite, gradientFlow 4s ease infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  .magic-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 16px 36px rgba(216, 27, 96, 0.65); }
+  .magic-btn:active { transform: scale(0.97); }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 10px 28px rgba(216, 27, 96, 0.5); }
+    50%      { box-shadow: 0 10px 40px rgba(255, 64, 129, 0.9); }
+  }
+
+  /* ---------------- LOVE REASONS (revealed by button) ---------------- */
+  .reasons {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .reason {
+    background: linear-gradient(135deg, #fff0f6, #ffe0ec);
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 16px;
+    color: #6a2a52;
+    box-shadow: 0 6px 16px rgba(216, 27, 96, 0.15);
+    opacity: 0;
+    transform: translateX(-30px);
+    border: 1px solid rgba(255, 110, 165, 0.3);
+  }
+  .reason.show {
+    animation: slideIn 0.6s forwards;
+  }
+  @keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ---------------- FORGIVE SECTION ---------------- */
+  .forgive {
+    margin-top: 30px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.6s;
+  }
+  .forgive.show { opacity: 1; height: auto; }
+  .forgive h2 { color: #c2185b; font-size: 24px; margin-bottom: 18px; }
+  .btn-row {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 60px;
+  }
+  .yes-btn {
+    font-family: inherit; font-size: 18px; font-weight: bold; color: #fff;
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+    border: none; padding: 14px 34px; border-radius: 40px; cursor: pointer;
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.4);
+    transition: transform 0.2s;
+  }
+  .yes-btn:hover { transform: scale(1.12); }
+  .no-btn {
+    font-family: inherit; font-size: 16px; color: #fff;
+    background: linear-gradient(135deg, #9e9e9e, #616161);
+    border: none; padding: 12px 26px; border-radius: 40px; cursor: pointer;
+    transition: transform 0.15s;
+    position: relative;
+  }
+
+  /* ---------------- FINAL MESSAGE ---------------- */
+  .final {
+    margin-top: 26px;
+    font-size: 22px;
+    color: #c2185b;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .final.show { opacity: 1; transform: scale(1); }
+
+  .footer-note {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #8a4a72;
+    z-index: 2;
+    position: relative;
+  }
+
+  /* ---------------- BURST HEARTS ON CLICK ---------------- */
+  .burst {
+    position: fixed;
+    font-size: 28px;
+    pointer-events: none;
+    z-index: 50;
+    animation: burstOut 1s ease-out forwards;
+  }
+  @keyframes burstOut {
+    0%   { transform: translate(0,0) scale(0.5); opacity: 1; }
+    100% { transform: translate(var(--bx), var(--by)) scale(1.4); opacity: 0; }
+  }
+
+  /* ---------------- MOBILE / PHONE FRIENDLY ---------------- */
+  @media (max-width: 600px) {
+    body { padding: 18px 12px 60px; }
+    .card { padding: 28px 20px; border-radius: 24px; }
+    .beating-heart { font-size: 64px; }
+    .subtitle { font-size: 16px; }
+    .letter { font-size: 16px; padding: 18px 18px; line-height: 1.7; }
+    .magic-btn { font-size: 18px; padding: 16px 28px; width: 100%; }
+    .reason { font-size: 15px; }
+    .forgive h2 { font-size: 20px; }
+    .btn-row { flex-direction: column; gap: 14px; min-height: auto; }
+    .yes-btn, .no-btn { width: 100%; padding: 16px 20px; font-size: 17px; }
+    .final { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- floating background hearts -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <div class="card">
+    <span class="beating-heart">💖</span>
+    <h1>I'm Truly Sorry, Krishu 💖</h1>
+    <p class="subtitle">To my Krishu — the only girl in my heart… forever 🌹</p>
+
+    <div class="letter">
+      <p>My dearest Krishu 💕, I know I hurt you, and that's the last thing in this world I ever wanted to do. 😔</p>
+      <p>You thought my eyes were wandering toward someone else — but I promise you, with my whole heart, there is <b>no one</b> else. There never was, and there never will be. You are my one and only. 👀➡️💝 You.</p>
+      <p>And you were right to feel unloved when I didn't give you enough of my time and attention. That's on me. You deserve <b>all</b> of me — my mornings, my evenings, my silly texts, and my full attention. ⏰❤️</p>
+      <p>I don't want to lose the most beautiful thing that ever happened to me. Please give me the chance to prove how much you mean to me. 🥹🙏</p>
+      <p class="signature">— Forever yours, Gaurav 💍</p>
+    </div>
+
+    <button class="magic-btn" id="magicBtn" onclick="revealLove()">Tap to see how much I love you 💞</button>
+
+    <div class="reasons" id="reasons"></div>
+
+    <div class="forgive" id="forgive">
+      <h2>So… will you forgive me, my queen Krishu? 👑💗</h2>
+      <div class="btn-row" id="btnRow">
+        <button class="yes-btn" onclick="sayYes()">Yes, I forgive you 💖</button>
+        <button class="no-btn" id="noBtn">No 😤</button>
+      </div>
+    </div>
+
+    <div class="final" id="final"></div>
+  </div>
+
+  <p class="footer-note">Made with 100% love by Gaurav, just for Krishu 💌✨</p>
+
+<script>
+  /* ---------------- BACKGROUND FLOATING HEARTS ---------------- */
+  const heartEmojis = ['💖','💕','❤️','💗','🌹','💝','💘','💞','🩷'];
+  const bg = document.getElementById('bgHearts');
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement('span');
+    s.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.fontSize = (16 + Math.random() * 30) + 'px';
+    s.style.animationDuration = (6 + Math.random() * 10) + 's';
+    s.style.animationDelay = (Math.random() * 8) + 's';
+    bg.appendChild(s);
+  }
+
+  /* ---------------- REASONS REVEALED BY THE MAGIC BUTTON ---------------- */
+  const loveReasons = [
+    "💝 Krishu, you are my favorite hello and my hardest goodbye.",
+    "🌙 Every night I fall asleep thankful that you're mine.",
+    "😍 Your smile is the only thing that fixes my worst days.",
+    "🤝 No distraction in this world is worth more than one second with you.",
+    "⏳ From now on, my time, my attention, and my heart are all yours.",
+    "💍 You are not a chapter in my life — you ARE my whole story."
+  ];
+
+  let revealed = false;
+  function revealLove() {
+    if (revealed) { burstHearts(); return; }
+    revealed = true;
+
+    const container = document.getElementById('reasons');
+    loveReasons.forEach((text, i) => {
+      const div = document.createElement('div');
+      div.className = 'reason';
+      div.textContent = text;
+      container.appendChild(div);
+      setTimeout(() => div.classList.add('show'), 300 * (i + 1));
+    });
+
+    // change the button text
+    const btn = document.getElementById('magicBtn');
+    btn.textContent = "💞 Shower me with hearts 💞";
+
+    // after reasons appear, show the forgive section
+    setTimeout(() => {
+      document.getElementById('forgive').classList.add('show');
+      document.getElementById('forgive').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300 * (loveReasons.length + 1) + 400);
+
+    burstHearts();
+  }
+
+  /* ---------------- HEART BURST ANIMATION ---------------- */
+  function burstHearts() {
+    const btn = document.getElementById('magicBtn');
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    for (let i = 0; i < 18; i++) {
+      const h = document.createElement('div');
+      h.className = 'burst';
+      h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      h.style.left = cx + 'px';
+      h.style.top = cy + 'px';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 80 + Math.random() * 160;
+      h.style.setProperty('--bx', Math.cos(angle) * dist + 'px');
+      h.style.setProperty('--by', Math.sin(angle) * dist + 'px');
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1000);
+    }
+  }
+
+  /* ---------------- THE PLAYFUL "NO" BUTTON THAT RUNS AWAY ---------------- */
+  const noBtn = document.getElementById('noBtn');
+  const noTexts = ["No 😤","Are you sure? 🥺","Really? 😢","Pretty please? 🙏","Catch me first! 😝","I'll be better! 💔","One more chance? 🌹","Don't go… 😭"];
+  let noClicks = 0;
+
+  function runAway(e) {
+    if (e) e.preventDefault();
+    noClicks++;
+    if (noClicks < noTexts.length) noBtn.textContent = noTexts[noClicks];
+
+    // shrink it each time so YES grows in importance
+    const scale = Math.max(0.5, 1 - noClicks * 0.08);
+
+    // keep the jump small on phones so it never flies off-screen
+    const isSmall = window.innerWidth < 600;
+    const rangeX = isSmall ? 90 : 240;
+    const rangeY = isSmall ? 60 : 120;
+    const x = (Math.random() - 0.5) * rangeX;
+    const y = (Math.random() - 0.5) * rangeY;
+    noBtn.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+    if (noClicks >= noTexts.length - 1) {
+      noBtn.textContent = "ok fine, YES 💖";
+      noBtn.style.transform = 'scale(1)';
+      noBtn.onclick = sayYes;
+      noBtn.ontouchstart = null;
+    }
+  }
+  noBtn.addEventListener('mouseover', runAway);   // desktop: dodges on hover
+  noBtn.addEventListener('click', runAway);
+  noBtn.addEventListener('touchstart', runAway, { passive: false }); // phone: dodges on tap
+
+  /* ---------------- THE BIG YES ---------------- */
+  function sayYes() {
+    const final = document.getElementById('final');
+    final.innerHTML = "🎉💖 Thank you for forgiving me, Krishu! 💖🎉<br>I promise to love you more every single day. Forever &amp; always. 💍♾️<br><span style='font-size:16px;'>— Your Gaurav 🥰</span>";
+    final.classList.add('show');
+    document.getElementById('forgive').style.display = 'none';
+
+    // confetti rain of hearts
+    confettiRain();
+    final.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function confettiRain() {
+    for (let i = 0; i < 60; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'burst';
+        h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        h.style.left = Math.random() * window.innerWidth + 'px';
+        h.style.top = '-20px';
+        h.style.setProperty('--bx', (Math.random() - 0.5) * 100 + 'px');
+        h.style.setProperty('--by', window.innerHeight + 100 + 'px');
+        h.style.animationDuration = (1.5 + Math.random()) + 's';
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 2600);
+      }, i * 60);
+    }
+  }
+</script>
+</body>
+</html>
